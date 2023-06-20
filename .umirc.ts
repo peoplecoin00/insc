@@ -14,5 +14,7 @@ export default defineConfig({
     port: 1001,
   },
   outputPath:'/docs',
+  base: '/insc/',
+  publicPath: '/insc/',
   fastRefresh: {},
 });
