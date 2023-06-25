@@ -9,15 +9,16 @@ declare global {
 }
 
 export default  function EthPage() {
-    // const receiver = '0xB3A6C05c1b795b08c9Ed936478A244529EDA20C0'; // Your receiver address
+    // const receiver = ''; // Your receiver address
     
     const [header, __header] = useState(localStorage.getItem('header') || 'data:,')
     const [json, __json] = useState(localStorage.getItem('json') || JSON.stringify({
-        "p":"erc-20",
-        "op":"mint",
-        "tick":"",
-        "id":"",
-        "amt":""
+        "p":"terc-20",
+        "op":"sell",
+        "tick":"terc",
+        "from": "",
+        "nonce":"0",
+        "amt":"1000"
     }))
     const jsonArr = useMemo(() => {
         try {
@@ -33,12 +34,15 @@ export default  function EthPage() {
         }
     }, [json])
 
-    console.log('jsonArr---', jsonArr)
+    // console.log('jsonArr---', jsonArr)
 
+    const [amount, __amount] = useState(localStorage.getItem('amount') || '0')
     const [receiver, __receiver] = useState(localStorage.getItem('receiver') || '')
     const [dataString, __dataString] = useState(localStorage.getItem('dataString') || '')
     
     const hex = useMemo(() => Web3.utils.asciiToHex(dataString), [dataString]) 
+
+    console.log('amount---', amount)
 
     const Connect =  async () => {
         if(!receiver){
@@ -56,7 +60,7 @@ export default  function EthPage() {
                 await window.ethereum.enable();
                 const accounts = await web3.eth.getAccounts();
                 const sender = accounts[0];
-                const value = web3.utils.toWei('0', 'ether');
+                const value = web3.utils.toWei(amount || '0', 'ether');
                 const data = web3.utils.asciiToHex(dataString);
                 const tx = await web3.eth.sendTransaction({from: sender, to: receiver, value: value, data: data});
                 console.log(`Transaction hash: ${tx.transactionHash}`);
@@ -151,6 +155,15 @@ export default  function EthPage() {
                 <Typography component="h1" sx={{ mb: '10px', mt: '10px', fontWeight: 500, fontSize: '18px' }}>Raw Data Hex</Typography>
                 <Typography sx={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all', background: 'rgba(0,0,0,0.1)', p: '10px' }}>{hex}</Typography>
             </Box>
+        </Box>
+        <Box sx={{
+            mt: '40px'
+        }}>
+            <Typography component="h1" sx={{ mb: '10px', fontWeight: 500, fontSize: '18px' }}>Receiver</Typography>
+            <input style={{width: '700px', height: '50px', padding: '20px' }} placeholder="Receiver Amount" value={amount} onInput={(e) => {
+                let { value } = e.target as any
+                __amount(value)
+            }} />
         </Box>
         <Box sx={{
             mt: '40px'
