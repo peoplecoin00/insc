@@ -16,9 +16,11 @@ export default  function EthPage() {
         "p":"terc-20",
         "op":"sell",
         "tick":"terc",
+        "amt":"1000",
+        "value":"0.01",
+        "expire":"18552202",
         "from": "",
         "nonce":"0",
-        "amt":"1000"
     }))
     const jsonArr = useMemo(() => {
         try {
