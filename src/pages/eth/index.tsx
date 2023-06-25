@@ -159,8 +159,8 @@ export default  function EthPage() {
         <Box sx={{
             mt: '40px'
         }}>
-            <Typography component="h1" sx={{ mb: '10px', fontWeight: 500, fontSize: '18px' }}>Receiver</Typography>
-            <input style={{width: '700px', height: '50px', padding: '20px' }} placeholder="Receiver Amount" value={amount} onInput={(e) => {
+            <Typography component="h1" sx={{ mb: '10px', fontWeight: 500, fontSize: '18px' }}>Amount</Typography>
+            <input style={{width: '700px', height: '50px', padding: '20px' }} placeholder="Amount" value={amount} onInput={(e) => {
                 let { value } = e.target as any
                 __amount(value)
             }} />
