@@ -8,20 +8,30 @@ declare global {
     }
 }
 
+const SELL = {
+    "p":"terc-20",
+    "op":"sell",
+    "tick":"terc",
+    "amt":"1000",
+    "value":"0.01",
+    "expire":"18552202",
+    "from": "",
+    "nonce":"0",
+}
+const SELLACK = {
+    "p":"terc-20",
+    "op":"sellAck", 
+    "tick":"terc",
+    "from":"",
+    "nonce":"0",
+    "sig":""
+}
+
 export default  function EthPage() {
     // const receiver = ''; // Your receiver address
     
     const [header, __header] = useState(localStorage.getItem('header') || 'data:,')
-    const [json, __json] = useState(localStorage.getItem('json') || JSON.stringify({
-        "p":"terc-20",
-        "op":"sell",
-        "tick":"terc",
-        "amt":"1000",
-        "value":"0.01",
-        "expire":"18552202",
-        "from": "",
-        "nonce":"0",
-    }))
+    const [json, __json] = useState(localStorage.getItem('json') || JSON.stringify(SELL))
     const jsonArr = useMemo(() => {
         try {
             const j = JSON.parse(json) as Object
@@ -144,9 +154,18 @@ export default  function EthPage() {
                     }}>add row</Button>
                 </Box>)}
                 
-                <Button sx={{ mt: '20px' }} variant="contained" onClick={() => {
-                    __dataString(header + json)
-                }}>To Data</Button>
+                <Box>
+                    <Button sx={{ mt: '20px' }} variant="contained" onClick={() => {
+                        __dataString(header + json)
+                    }}>To Data</Button>
+
+                    <Button sx={{ mt: '20px', ml: '20px' }} variant="outlined" onClick={() => {
+                        __json(JSON.stringify(SELL))
+                    }}>Reset Sell</Button>
+                    <Button sx={{ mt: '20px', ml: '20px' }} variant="outlined" onClick={() => {
+                        __json(JSON.stringify(SELLACK))
+                    }}>Reset Buy</Button>
+                </Box>
             </Box>
             <Box sx={{ width: '500px', }}>
                 <Typography component="h1" sx={{ mb: '10px', fontWeight: 500, fontSize: '18px' }}>Raw Data</Typography>
