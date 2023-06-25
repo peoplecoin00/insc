@@ -1,6 +1,6 @@
 # People Coin
 
-Website: http://peoplecoin.co/
+Website: https://peoplecoin00.github.io/insc/
 
 ## Getting Started
 
