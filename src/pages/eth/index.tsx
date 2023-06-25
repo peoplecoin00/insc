@@ -107,7 +107,7 @@ export default  function EthPage() {
                         __json(JSON.stringify(newJson))
                     }} />
                     <Typography sx={{ m:'0px 10px' }}>:</Typography>
-                    <input value={v} onInput={(e) => {
+                    <input value={v} style={{ width: '380px' }} onInput={(e) => {
                         let { value } = e.target as any
                         let newJson = {}
                         jsonArr.map((ii, _index) => {
